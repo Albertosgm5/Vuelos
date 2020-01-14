@@ -38,9 +38,7 @@ import modelo.ListaPilotosXML;
 import modelo.Piloto;
 import util.Conexion;
 import javafx.stage.Stage;
-import org.neodatis.odb.ODB;
-import org.neodatis.odb.ODBFactory;
-import org.neodatis.odb.Objects;
+
 
 public class MainApp extends Application{
 	private Stage primaryStage;
