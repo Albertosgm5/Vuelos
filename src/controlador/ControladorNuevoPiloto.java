@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import util.Fecha;
 import org.controlsfx.dialog.Dialogs;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
@@ -74,7 +73,7 @@ public class ControladorNuevoPiloto {
         contraseniaCampo.setText(piloto.get);
         calleCampo.setText(piloto.getStreet());
         codigoPostalCampo.setText(Integer.toString(piloto.getPostalCode()));
-        ciudadCampo.setText(person.getCity());
+        ciudadCampo.setText(piloto.getCity());
         
        
         private TextField clubCampo;
