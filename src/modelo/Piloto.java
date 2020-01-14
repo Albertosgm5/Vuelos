@@ -2,17 +2,13 @@ package modelo;
 
 import java.time.LocalDate;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import controlador.FXML;
-import controlador.TextField;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import util.AdaptadorFechaLocal;
 public class Piloto {
 	
 	    private final StringProperty nombre;
@@ -25,13 +21,13 @@ public class Piloto {
 	    private final StringProperty calle;
 	    private final StringProperty ciudad;
 	    private final StringProperty provincia;
-	    private final IntProperty telefono;
-	    private final IntProperty codigoPostal;
+	    private final IntegerProperty telefono;
+	    private final IntegerProperty codigoPostal;
 	    /**
 	     * Default constructor.
 	     */
 	    public Piloto() {
-	        this(null, null);
+	        this(null, null, null, null, null, null, null, null, null, null, 0, 0);
 	    }
 	    
 	    /**
@@ -40,11 +36,12 @@ public class Piloto {
 	     * @param firstName
 	     * @param lastName
 	     */
-	    public Piloto(String nombre, String apellidos) {
+	    public Piloto(String nombre, String apellidos, String contrasenia, String club, String email, String licencia, String pais, String calle, String ciudad, String provincia, int telefono, int codigoPostal) {
 	        this.nombre = new SimpleStringProperty(nombre);
 	        this.apellidos = new SimpleStringProperty(apellidos);
 	        this.contrasenia = new SimpleStringProperty(contrasenia);
 	        this.club = new SimpleStringProperty(club);
+	        this.email = new SimpleStringProperty(email);
 	        this.licencia = new SimpleStringProperty(licencia);
 	        this.pais = new SimpleStringProperty(pais);
 	        this.calle = new SimpleStringProperty(calle);
@@ -64,7 +61,7 @@ public class Piloto {
 	        this.nombre.set(nombre);
 	    }
 	    
-	    public StringProperty NombreProperty() {
+	    public StringProperty nombreProperty() {
 	        return nombre;
 	    }
 
@@ -176,27 +173,27 @@ public class Piloto {
 	        return provincia;
 	    }
 
-	    public String getTelefono() {
+	    public int getTelefono() {
 	        return telefono.get();
 	    }
 
-	    public void setTelefono(String telefono) {
+	    public void setTelefono(int telefono) {
 	        this.telefono.set(telefono);
 	    }
 	    
-	    public StringProperty telefonoProperty() {
+	    public IntegerProperty telefonoProperty() {
 	        return telefono;
 	    }
 
-	    public String getCodigoPostal() {
+	    public int getCodigoPostal() {
 	        return codigoPostal.get();
 	    }
 
-	    public void setCodigoPostal(String codigoPostal) {
+	    public void setCodigoPostal(int codigoPostal) {
 	        this.codigoPostal.set(codigoPostal);
 	    }
 	    
-	    public StringProperty codigoPostalProperty() {
+	    public IntegerProperty codigoPostalProperty() {
 	        return codigoPostal;
 	    }
 
