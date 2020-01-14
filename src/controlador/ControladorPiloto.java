@@ -82,7 +82,7 @@ public class ControladorPiloto {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        personaTabla.setItems(mainApp.getPersonaData());
+        pilotoTabla.setItems(mainApp.getPilotoData());
     }
     /**
      * Fills all text fields to show details about the person.

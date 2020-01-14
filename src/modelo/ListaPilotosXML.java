@@ -11,17 +11,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 
  * @author Marco Jakob
  */
-@XmlRootElement(name = "personas")
+@XmlRootElement(name = "pilotos")
 
 public class ListaPilotosXML {
-	private List<Piloto> personas;
+	private List<Piloto> pilotos;
 
-    @XmlElement(name = "persona")
-    public List<Piloto> getPersons() {
-        return personas;
+    @XmlElement(name = "pilotos")
+    public List<Piloto> getPilotos() {
+        return pilotos;
     }
 
-    public void setPersons(List<Piloto> personas) {
-        this.personas = personas;
+    public void setPilotos(List<Piloto> pilotos) {
+        this.pilotos = pilotos;
     }
 }

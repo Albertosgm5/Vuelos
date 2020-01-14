@@ -18,7 +18,7 @@ public class ControladorNuevoPiloto {
     @FXML
     private TextField apellidosCampo;
     @FXML
-    private java.awt.TextField contraseniaCampo;
+    private TextField contraseniaCampo;
     @FXML
     private TextField clubCampo;
     @FXML
