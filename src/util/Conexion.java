@@ -22,6 +22,17 @@ public class Conexion {
 			
 			return conex;
 	}
+	
+	public static void closeConnection(Connection connArg) {
+		try {
+			if (connArg != null) {
+				connArg.close();
+				connArg = null;
+			}
+		} catch (SQLException sqle) {
+			System.err.println(sqle);
+		}
+	}
 
 
 }

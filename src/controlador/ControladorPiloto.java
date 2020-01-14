@@ -7,41 +7,52 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.controlsfx.dialog.Dialogs;
-import org.neodatis.odb.ODB;
-import org.neodatis.odb.ODBFactory;
-import org.neodatis.odb.Objects;
-import org.neodatis.odb.core.query.IQuery;
-import org.neodatis.odb.core.query.criteria.And;
-import org.neodatis.odb.core.query.criteria.ComposedExpression;
-import org.neodatis.odb.core.query.criteria.ICriterion;
-import org.neodatis.odb.core.query.criteria.Where;
-import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 import modelo.Piloto;
-import util.Fecha;
+import util.Conexion;
 
 public class ControladorPiloto {
     @FXML
-    private TableView<Piloto> personaTabla;
+    private TableView<Piloto> pilotoTabla;
     @FXML
     private TableColumn<Piloto, String> nombreColumna;
     @FXML
-    private TableColumn<Piloto, String> apellidoColumna;
-
+    private TableColumn<Piloto, String> apellidosColumna;
+    
+    private static final String DELETE_PILOTO = "delete from pilotos  where nombre = ? and apellidos = ?";
+    
     @FXML
     private Label nombreEtiqueta;
     @FXML
-    private Label apellidoEtiqueta;
+    private Label apellidosEtiqueta;
+    @FXML
+    private Label contraseniaEtiqueta;
+    @FXML
+    private Label clubEtiqueta;
+    @FXML
+    private Label emailEtiqueta;
+    @FXML
+    private Label licenciaEtiqueta;
+    @FXML
+    private Label paisEtiqueta;
     @FXML
     private Label calleEtiqueta;
     @FXML
-    private Label codigoPostalEtiqueta;
-    @FXML
     private Label ciudadEtiqueta;
     @FXML
-    private Label cumpleEtiqueta;
-
+    private Label provinciaEtiqueta;
+    @FXML
+    private Label telefonoEtiqueta;
+    @FXML
+    private Label codigoPostalEtiqueta;
+    
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -60,15 +71,15 @@ public class ControladorPiloto {
     private void initialize() {
     	// Initialize the person table with the two columns.
         nombreColumna.setCellValueFactory(
-                cellData -> cellData.getValue().firstNameProperty());
-        apellidoColumna.setCellValueFactory(
-                cellData -> cellData.getValue().lastNameProperty());
+                cellData -> cellData.getValue().nombreProperty());
+        apellidosColumna.setCellValueFactory(
+                cellData -> cellData.getValue().apellidosProperty());
 
         // Clear person details.
         showPersonDetails(null);
 
         // Listen for selection changes and show the person details when changed.
-        personaTabla.getSelectionModel().selectedItemProperty().addListener(
+        pilotoTabla.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
     
     }
@@ -90,25 +101,35 @@ public class ControladorPiloto {
      * 
      * @param person the person or null
      */
-    private void showPersonDetails(Piloto persona) {
-        if (persona != null) {
+    private void showPilotoDetails(Piloto piloto) {
+        if (piloto != null) {
             // Fill the labels with info from the person object.
-        	nombreEtiqueta.setText(persona.getFirstName());
-        	apellidoEtiqueta.setText(persona.getLastName());
-        	calleEtiqueta.setText(persona.getStreet());
-        	codigoPostalEtiqueta.setText(Integer.toString(persona.getPostalCode()));
-        	ciudadEtiqueta.setText(persona.getCity());
-        	cumpleEtiqueta.setText(Fecha.format(persona.getBirthday()));
-            // TODO: We need a way to convert the birthday into a String! 
-            // birthdayLabel.setText(...);
+        	nombreEtiqueta.setText(piloto.getNombre());
+        	apellidosEtiqueta.setText(piloto.getApellidos());
+        	contraseniaEtiqueta.setText(piloto.getContrasenia());
+        	clubEtiqueta.setText(piloto.getClub());
+        	emailEtiqueta.setText(piloto.getEmail());
+        	licenciaEtiqueta.setText(piloto.getLicencia());
+        	paisEtiqueta.setText(piloto.getPais());
+        	calleEtiqueta.setText(piloto.getCalle());
+        	ciudadEtiqueta.setText(piloto.getCiudad());
+        	provinciaEtiqueta.setText(piloto.getProvincia());
+        	telefonoEtiqueta.setText(piloto.getTelefono());
+        	codigoPostalEtiqueta.setText(piloto.getCodigoPostal());
         } else {
             // Person is null, remove all the text.
         	nombreEtiqueta.setText("");
-        	apellidoEtiqueta.setText("");
+        	apellidosEtiqueta.setText("");
+        	contraseniaEtiqueta.setText("");
+        	clubEtiqueta.setText("");
+        	emailEtiqueta.setText("");
+        	licenciaEtiqueta.setText("");
+        	paisEtiqueta.setText("");
         	calleEtiqueta.setText("");
-        	codigoPostalEtiqueta.setText("");
         	ciudadEtiqueta.setText("");
-        	cumpleEtiqueta.setText("");
+        	provinciaEtiqueta.setText("");
+        	telefonoEtiqueta.setText("");
+        	codigoPostalEtiqueta.setText("");
         }
     }
     
@@ -116,27 +137,41 @@ public class ControladorPiloto {
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void handleDeletePerson() {
-    	int selectedIndex = personaTabla.getSelectionModel().getSelectedIndex();
+    private void borradoPiloto() {
+    	int selectedIndex = pilotoTabla.getSelectionModel().getSelectedIndex();
     	//recogemos los datos necesarios para realizar los criterios de la consulta
-    	String nombre =(String) personaTabla.getSelectionModel().getSelectedItem().getFirstName();
-    	String apellido =(String) personaTabla.getSelectionModel().getSelectedItem().getLastName();
+    	String nombre =(String) pilotoTabla.getSelectionModel().getSelectedItem().getNombre();
+    	String apellidos =(String) pilotoTabla.getSelectionModel().getSelectedItem().getApellidos();
     	if (selectedIndex >= 0) {
-            personaTabla.getItems().remove(selectedIndex);
-         // conectamos con la base de datos, si no existe se crea
-            ODB odb = ODBFactory.open("AGENDA.DB");
-         // Cogemos los criterios para la consulta
-            ICriterion criterio = new And().add(Where.equal("nombre", nombre)).add(Where.equal("apellido",apellido));
-         // Hacemos la consulta 
-            IQuery query = new CriteriaQuery(Piloto.class, criterio);
-         // Cargamos los objetos que coincidan con esa consulta
-            Objects<Piloto> objects = odb.getObjects(query);
-         // Nos posicionamos en el primer resultado
-            Piloto per=(Piloto) objects.getFirst();
-         // Y lo borramos
-            odb.delete(per);
-         //cerramos la conexión con la base de datos
-            odb.close();
+    		Connection con = null;
+    		PreparedStatement stmt = null;
+    		ResultSet rs = null;
+    		try {
+    			con = new Conexion().dameConexion();
+    			stmt = con.prepareStatement(DELETE_PILOTO);
+    			stmt.setString(1, nombre);
+    			stmt.setString(2, apellidos);
+    			stmt.executeUpdate();
+
+    		}catch (IOException e) {
+    			System.err.println(e.getMessage());
+    		} catch (SQLException sqle) {
+    			System.err.println(sqle.getMessage());
+    		} finally {
+    			try {
+    				if (rs != null) {
+    					rs.close();
+    				}
+    				if (stmt != null) {
+    					stmt.close();
+    				}
+    				if (con != null) {
+    					Conexion.closeConnection(con);
+    				}
+    			} catch (SQLException sqle) {
+    				System.err.println(sqle.getMessage());
+    			}
+    		}
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
@@ -154,12 +189,12 @@ public class ControladorPiloto {
      * details for a new person.
      */
     @FXML
-    private void handleNewPerson() {
+    private void nuevoPiloto() {
         Piloto tempPerson = new Piloto();
         //boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
-        boolean okClicked = mainApp.showPersonaNuevaDialogo(tempPerson);
+        boolean okClicked = mainApp.showPilotoNuevaDialogo(tempPiloto);
         if (okClicked) {
-            mainApp.getPersonaData().add(tempPerson);
+            mainApp.getPilotoData().add(tempPiloto);
         }
     }
 
@@ -168,12 +203,12 @@ public class ControladorPiloto {
      * details for the selected person.
      */
     @FXML
-    private void handleEditPerson() {
+    private void editarPiloto() {
     	Piloto selectedPerson = personaTabla.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+        if (selectedPiloto != null) {
+            boolean okClicked = mainApp.showPilotoEditDialog(selectedPiloto);
             if (okClicked) {
-                showPersonDetails(selectedPerson);
+                showPilotoDetails(selectedPiloto);
             }
 
         } else {
