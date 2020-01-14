@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Label text="Calendario de Concursos" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <TableView prefHeight="517.0" prefWidth="1150.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="75.0" text="No" />
+          <TableColumn prefWidth="375.0" text="Concurso" />
+            <TableColumn prefWidth="145.0" text="Tipo" />
+            <TableColumn prefWidth="145.0" text="Fecha" />
+            <TableColumn prefWidth="175.0" text="Lugar" />
+            <TableColumn prefWidth="145.0" text="Fin Registro" />
+            <TableColumn prefWidth="95.0" text="Acción" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>
