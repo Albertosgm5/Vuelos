@@ -19,21 +19,16 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Darse de alta">
+            <Menu mnemonicParsing="false" text="Entrar">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Darse de baja">
+            <Menu mnemonicParsing="false" text="Crear cuenta">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Datos piloto">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
    </top>
