@@ -8,9 +8,6 @@ import javafx.stage.Stage;
 
 import java.sql.PreparedStatement;
 
-import org.controlsfx.dialog.Dialogs;
-import org.neodatis.odb.ODB;
-import org.neodatis.odb.ODBFactory;
 import modelo.Piloto;
 import util.Conexion;
 import modelo.ListaPilotosXML;

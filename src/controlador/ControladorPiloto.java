@@ -13,8 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.controlsfx.dialog.Dialogs;
-
 import modelo.Piloto;
 import util.Conexion;
 
