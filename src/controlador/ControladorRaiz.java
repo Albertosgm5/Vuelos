@@ -31,8 +31,8 @@ public class ControladorRaiz {
      */
     @FXML
     private void handleNew() {
-        mainApp.getPersonaData().clear();
-        mainApp.setPersonFilePath(null);
+        mainApp.getPilotoData().clear();
+      
     }
 
     /**
@@ -53,50 +53,12 @@ public class ControladorRaiz {
         if (file != null) {
             //mainApp.loadPersonDataFromFile(file);
         }*/
-        mainApp.loadPersonDataFromNeodatis();
+        mainApp.loadPilotoDataFromMysql();
     }
 
-    /**
-     * Saves the file to the person file that is currently open. If there is no
-     * open file, the "save as" dialog is shown.
-     */
-    @FXML
-    private void handleSave() {
-        File personFile = mainApp.getPersonFilePath();
-        if (personFile != null) {
-            mainApp.savePersonDataToFile(personFile);
-            //mainApp.savePersonDataToMysql();
-        } else {
-            handleSaveAs();
-        }
-        mainApp.savePersonDataNeodatis();
-    }
-    /**
-     * Opens a FileChooser to let the user select a file to save to.
-     */
-    @FXML
-    private void handleSaveAs() {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
-
-        if (file != null) {
-            // Make sure it has the correct extension
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            mainApp.savePersonDataNeodatis();
-            mainApp.savePersonDataToFile(file);
-            mainApp.savePersonDataToMysql();
-            
-        }
-    }
+   
+   
+   
 
     /**
      * Opens an about dialog.
@@ -118,11 +80,6 @@ public class ControladorRaiz {
     private void handleExit() {
         System.exit(0);
     }
-    /**
-     * Opens the birthday statistics.
-     */
-    @FXML
-    private void handleShowBirthdayStatistics() {
-      mainApp.showBirthdayStatistics();
-    }
+    
+ 
 }

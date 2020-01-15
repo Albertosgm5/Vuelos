@@ -12,9 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.prefs.Preferences;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -43,11 +41,11 @@ import javafx.stage.Stage;
 public class MainApp extends Application{
 	private Stage primaryStage;
     private BorderPane rootLayout;
-    private static final String CREATE_VUELOS = "insert into pilotos (nombre, apellidos, contraseña, club, email, licencia, pais, calle, ciudad, provincia, telefono, codigo postal) values (?,?,?,?,?,?,?,?,?,?,?)";
+    //private static final String CREATE_VUELOS = "insert into pilotos (nombre, apellidos, contraseña, club, email, licencia, pais, calle, ciudad, provincia, telefono, codigo postal) values (?,?,?,?,?,?,?,?,?,?,?)";
     /**
      * The data as an observable list of Persons.
      */
-    private ObservableList<Piloto> pilotoData = FXCollections.observableArrayList();
+    static ObservableList<Piloto> pilotoData = FXCollections.observableArrayList();
 
     /**
      * Constructor
@@ -60,7 +58,7 @@ public class MainApp extends Application{
      * Returns the data as an observable list of Persons. 
      * @return
      */
-    public ObservableList<Piloto> getPersonaData() {
+    public ObservableList<Piloto> getPilotoData() {
         return pilotoData;
     }
   
@@ -73,7 +71,7 @@ public class MainApp extends Application{
 
         initRootLayout();
 
-        showPersonOverview();
+        showPilotoOverview();
         
     }
     
@@ -102,10 +100,7 @@ public class MainApp extends Application{
         }
 
         // Try to load last opened person file.
-        File file = getPersonFilePath();
-        if (file != null) {
-            loadPersonDataFromFile(file);
-        }
+      
     }
 
     /**
@@ -156,7 +151,7 @@ public class MainApp extends Application{
             // Set the person into the controller.
             ControladorEditarPiloto controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setPerson(piloto);
+            controller.setPiloto(piloto);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -209,7 +204,12 @@ public class MainApp extends Application{
         launch(args);
     }
 
-    public void savePilotoDataToMysql() {
+	public void loadPilotoDataFromMysql() {
+		// TODO Auto-generated method stub
+		
+	}
+
+    /*public void savePilotoDataToMysql() {
     	PreparedStatement stmt = null;
     	Conexion conexion = new Conexion();
         try {
@@ -240,7 +240,7 @@ public class MainApp extends Application{
             System.err.print(e);
             alert.showAndWait();
         }
-    }
+    }*/
  
    
    
