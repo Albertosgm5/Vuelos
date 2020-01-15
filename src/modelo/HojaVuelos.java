@@ -1,7 +1,10 @@
 package modelo;
 
+import java.time.LocalDate;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,13 +12,13 @@ import javafx.beans.property.StringProperty;
 
 public class HojaVuelos {
 	private final StringProperty nombrePiloto;
-	private final StringProperty fecha;
 	private final IntegerProperty nManga;
 	private final IntegerProperty nGrupo;
 	private final DoubleProperty tVuelo;
 	private final IntegerProperty dAterrizaje;
 	private final IntegerProperty aCorte;
 	private final IntegerProperty penalizaciones;
+	private final ObjectProperty<LocalDate> fecha;
 
 	/**
 	 * Default constructor.
