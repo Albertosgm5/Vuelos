@@ -110,7 +110,7 @@ public class MainApp extends Application{
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../vista/Piloto.fxml"));
+            loader.setLocation(MainApp.class.getResource("../vista/Home.fxml"));
             AnchorPane pilotoOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -137,7 +137,7 @@ public class MainApp extends Application{
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../vista/EditarPiloto.fxml"));
+            loader.setLocation(MainApp.class.getResource("../vista/Editar.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
