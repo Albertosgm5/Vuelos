@@ -76,11 +76,11 @@ public class ControladorPiloto {
                 cellData -> cellData.getValue().apellidosProperty());
 
         // Clear person details.
-        showPersonDetails(null);
+        showPilotoDetails(null);
 
         // Listen for selection changes and show the person details when changed.
         pilotoTabla.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showPersonDetails(newValue));
+                (observable, oldValue, newValue) -> showPilotoDetails(newValue));
     
     }
 
@@ -114,8 +114,8 @@ public class ControladorPiloto {
         	calleEtiqueta.setText(piloto.getCalle());
         	ciudadEtiqueta.setText(piloto.getCiudad());
         	provinciaEtiqueta.setText(piloto.getProvincia());
-        	telefonoEtiqueta.setText(piloto.getTelefono());
-        	codigoPostalEtiqueta.setText(piloto.getCodigoPostal());
+        	telefonoEtiqueta.setText(Integer.toString(piloto.getTelefono()));
+        	codigoPostalEtiqueta.setText(Integer.toString(piloto.getCodigoPostal()));
         } else {
             // Person is null, remove all the text.
         	nombreEtiqueta.setText("");
@@ -153,9 +153,7 @@ public class ControladorPiloto {
     			stmt.setString(2, apellidos);
     			stmt.executeUpdate();
 
-    		}catch (IOException e) {
-    			System.err.println(e.getMessage());
-    		} catch (SQLException sqle) {
+    		}catch (SQLException sqle) {
     			System.err.println(sqle.getMessage());
     		} finally {
     			try {
@@ -190,7 +188,7 @@ public class ControladorPiloto {
      */
     @FXML
     private void nuevoPiloto() {
-        Piloto tempPerson = new Piloto();
+        Piloto tempPiloto = new Piloto();
         //boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
         boolean okClicked = mainApp.showPilotoNuevaDialogo(tempPiloto);
         if (okClicked) {
@@ -204,7 +202,7 @@ public class ControladorPiloto {
      */
     @FXML
     private void editarPiloto() {
-    	Piloto selectedPerson = personaTabla.getSelectionModel().getSelectedItem();
+    	Piloto selectedPiloto = pilotoTabla.getSelectionModel().getSelectedItem();
         if (selectedPiloto != null) {
             boolean okClicked = mainApp.showPilotoEditDialog(selectedPiloto);
             if (okClicked) {
