@@ -7,8 +7,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 
 public class HojaVuelos {
 	private final StringProperty nombrePiloto;
@@ -20,16 +22,13 @@ public class HojaVuelos {
 	private final IntegerProperty penalizaciones;
 	private final ObjectProperty<LocalDate> fecha;
 
-	/**
-	 * Default constructor.
-	 */
 	public HojaVuelos() {
 		this(null, null);
 	}
 
-	public HojaVuelos(String nombrePiloto, String fecha) {
+	public HojaVuelos(String nombrePiloto, LocalDate fecha) {
 		this.nombrePiloto = new SimpleStringProperty(nombrePiloto);
-		this.fecha = new SimpleStringProperty(fecha);
+		this.fecha = new SimpleObjectProperty<LocalDate>(LocalDate.of(0000, 0, 00));
 		this.nManga = new SimpleIntegerProperty(0);
 		this.nGrupo = new SimpleIntegerProperty(0);
 		this.tVuelo = new SimpleDoubleProperty(0);
@@ -41,10 +40,6 @@ public class HojaVuelos {
 
 	public StringProperty getNombrePiloto() {
 		return nombrePiloto;
-	}
-
-	public StringProperty getFecha() {
-		return fecha;
 	}
 
 	public IntegerProperty getnManga() {
@@ -75,9 +70,13 @@ public class HojaVuelos {
 		this.nombrePiloto.set(nombrePiloto);
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha.set(fecha);
+	public ObjectProperty<LocalDate> getFecha() {
+		return fecha;
 	}
+	
+	public void setFecha(LocalDate birthday) {
+        this.fecha.set(birthday);
+    }
 
 	public void setnManga(int nManga) {
 		this.nManga.set(nManga);;
