@@ -65,11 +65,6 @@ ALTER TABLE `pilotos`
   MODIFY `idPiloto` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -90,7 +85,7 @@ DROP TABLE IF EXISTS `hojavuelos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hojavuelos` (
   `idhojavuelos` int(11) NOT NULL AUTO_INCREMENT,
-  `nombrePiloto` varchar(150) DEFAULT NULL,
+  `nombrePiloto` varchar(45) DEFAULT NULL,
   `nManga` int(11) DEFAULT NULL,
   `nGrupo` int(11) DEFAULT NULL,
   `tVuelo` double DEFAULT NULL,
@@ -98,7 +93,9 @@ CREATE TABLE `hojavuelos` (
   `aCorte` int(11) DEFAULT NULL,
   `penalizaciones` int(11) DEFAULT NULL,
   `idPiloto` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idhojavuelos`)
+  PRIMARY KEY (`idhojavuelos`),
+  KEY `IDPILOTO_idx` (`idPiloto`),
+  CONSTRAINT `IDPILOTO` FOREIGN KEY (`idPiloto`) REFERENCES `pilotos` (`idPiloto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
