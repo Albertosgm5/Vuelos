@@ -169,7 +169,6 @@ public class MainApp extends Application{
             loader.setLocation(MainApp.class.getResource("../vista/Altas.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Nuevo Piloto");
             dialogStage.initModality(Modality.WINDOW_MODAL);
