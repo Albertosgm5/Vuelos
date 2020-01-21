@@ -1,41 +1,19 @@
 package controlador;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.prefs.Preferences;
-
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-
-import org.w3c.dom.Document;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modelo.ListaPilotosXML;
 import modelo.Piloto;
-import util.Conexion;
-import javafx.stage.Stage;
+import vista.ControladorPiloto;
+import vista.ControladorRaiz;
 
 
 public class MainApp extends Application{
@@ -71,7 +49,7 @@ public class MainApp extends Application{
 
         initRootLayout();
 
-        showPilotoOverview();
+      //  showPilotoOverview();
         
     }
     

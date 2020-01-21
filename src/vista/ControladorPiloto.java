@@ -1,4 +1,4 @@
-package controlador;
+package vista;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import controlador.MainApp;
 import modelo.Piloto;
 import util.Conexion;
 
