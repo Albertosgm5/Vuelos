@@ -12,8 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Piloto;
-import vista.ControladorPiloto;
-import vista.ControladorRaiz;
 
 
 public class MainApp extends Application{
@@ -49,7 +47,7 @@ public class MainApp extends Application{
 
         initRootLayout();
 
-      //  showPilotoOverview();
+       // showPilotoOverview();
         
     }
     
