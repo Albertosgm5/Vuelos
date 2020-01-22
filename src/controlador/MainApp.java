@@ -101,6 +101,25 @@ public class MainApp extends Application{
         }
     }
     
+    public void showHojaVuelos() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../vista/HojaVuelo.fxml"));
+            AnchorPane hojaVuelo = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(hojaVuelo);
+
+            // Give the controller access to the main app.
+            ControladorHojaVuelos controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * Opens a dialog to edit details for the specified person. If the user
      * clicks OK, the changes are saved into the provided person object and true

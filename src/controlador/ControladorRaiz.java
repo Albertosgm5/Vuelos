@@ -26,6 +26,13 @@ public class ControladorRaiz {
         mainApp.getPilotoData().clear();
       
     }
+    
+    
+    @FXML
+	private void hojaVuelos() {
+		this.mainApp.showHojaVuelos();
+		
+	}
 
     /**
      * Opens a FileChooser to let the user select an address book to load.
