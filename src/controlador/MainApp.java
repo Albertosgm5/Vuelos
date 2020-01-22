@@ -47,7 +47,7 @@ public class MainApp extends Application{
 
         initRootLayout();
 
-       // showPilotoOverview();
+        showPilotoOverview();
         
     }
     
@@ -93,7 +93,7 @@ public class MainApp extends Application{
             rootLayout.setCenter(pilotoOverview);
 
             // Give the controller access to the main app.
-            ControladorPiloto controller = loader.getController();
+            ControladorHome controller = loader.getController();
             controller.setMainApp(this);
 
         } catch (IOException e) {
