@@ -119,6 +119,23 @@ public class MainApp extends Application{
             e.printStackTrace();
         }
     }
+    public void showConcursos() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../vista/Concursos.fxml"));
+            BorderPane concursos = (BorderPane) loader.load();
+            
+            rootLayout.setCenter(concursos);
+
+            // Give the controller access to the main app.
+            ControladorConcursos controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     /**
      * Opens a dialog to edit details for the specified person. If the user

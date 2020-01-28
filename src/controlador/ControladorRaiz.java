@@ -4,6 +4,7 @@ package controlador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import modelo.Piloto;
 
 
 public class ControladorRaiz {
@@ -33,7 +34,25 @@ public class ControladorRaiz {
 		this.mainApp.showHojaVuelos();
 		
 	}
+    @FXML
+    private void concursos() {
+		this.mainApp.showConcursos();
+		
+	}
 
+    /*private void nuevoPiloto(Piloto piloto) {
+  		this.mainApp.showPilotoNuevaDialogo(piloto);
+  		
+  	}*/
+    @FXML
+    private void nuevoPiloto() {
+        Piloto tempPerson = new Piloto();
+        //boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        boolean okClicked = mainApp.showPilotoNuevaDialogo(tempPerson);
+        if (okClicked) {
+            mainApp.getPilotoData().add(tempPerson);
+        }
+    }
     /**
      * Opens a FileChooser to let the user select an address book to load.
      */

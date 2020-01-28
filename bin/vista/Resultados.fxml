@@ -5,17 +5,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="250.0" prefWidth="200.0">
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
          <top>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane prefHeight="362.0" prefWidth="603.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="77.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="101.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="151.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="487.0" minWidth="10.0" prefWidth="105.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="93.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="142.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -25,20 +29,53 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="MG1" />
-                  <TextField prefHeight="0.0" prefWidth="249.0" GridPane.columnIndex="1" />
-                  <Label text="MG2" GridPane.rowIndex="1" />
-                  <Label text="MG6" GridPane.rowIndex="5" />
-                  <Label text="MG3" GridPane.rowIndex="2" />
-                  <Label text="MG4" GridPane.rowIndex="3" />
-                  <Label text="MG5" GridPane.rowIndex="4" />
-                  <Label text="Total" GridPane.rowIndex="6" />
+                  <Label text="MG1" GridPane.rowIndex="1" />
+                  <TextField prefHeight="0.0" prefWidth="249.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label text="MG2" GridPane.rowIndex="2" />
+                  <Label text="MG6" GridPane.rowIndex="6" />
+                  <Label text="MG3" GridPane.rowIndex="3" />
+                  <Label text="MG4" GridPane.rowIndex="4" />
+                  <Label text="MG5" GridPane.rowIndex="5" />
+                  <Label text="Total" GridPane.rowIndex="7" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <Label text="Grupo:" GridPane.columnIndex="1" />
+                  <Label text="Tiempo de vuelo:" GridPane.columnIndex="2" />
+                  <Label prefHeight="21.0" prefWidth="103.0" text="Aterrizaje:" GridPane.columnIndex="3" />
+                  <Label text="Altura:" GridPane.columnIndex="4" />
+                  <Label text="Total:" GridPane.columnIndex="5" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="1" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="2" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="3" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="4" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField GridPane.columnIndex="5" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </top>
