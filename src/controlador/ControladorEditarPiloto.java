@@ -57,7 +57,7 @@ public class ControladorEditarPiloto {
     @FXML
     private TableColumn<Piloto, String> apellidosColumna;
     
-    private static final String EDIT_PILOTO = "update pilotos set nombre = ?, apellidos = ?, contraseña = ?, club = ?, email = ?, licencia = ?, pais = ?, calle = ?, ciudad = ?, provincia = ? , telefono = ?, codigoPostal = ? where licencia = ?";
+    private static final String EDIT_PILOTO = "update pilotos set nombre = ?, apellidos = ?, contrasena = ?, club = ?, email = ?, licencia = ?, pais = ?, calle = ?, ciudad = ?, provincia = ? , telefono = ?, codigoPostal = ? where licencia = ?";
     @FXML
     private void initialize() {
     }
