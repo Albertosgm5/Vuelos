@@ -85,7 +85,7 @@ public class ControladorNuevoPiloto {
      */
     @FXML
     private void handleOk() {
-        if (isInputValid()) {
+        //if (isInputValid()) {
             piloto.setNombre(nombreCampo.getText());
             piloto.setApellidos(apellidosCampo.getText());
             piloto.setContrasenia(contraseniaCampo.getText());
@@ -103,9 +103,9 @@ public class ControladorNuevoPiloto {
             try {
             	ListaPilotosXML list = new ListaPilotosXML();
                 list.setPiloto(MainApp.pilotoData);
-            	
+                for(int i=0;i<list.getPiloto().size();i++) {
             		stmt = conexion.dameConexion().prepareStatement(CREATE_PILOTO);
-            		Piloto p = (Piloto) list.getPiloto();
+            		Piloto p = (Piloto) list.getPiloto().get(i);
             		stmt.setString(1, p.getNombre());
           			stmt.setString(2, p.getApellidos());
           			stmt.setString(3, p.getContrasenia());
@@ -119,7 +119,7 @@ public class ControladorNuevoPiloto {
           			stmt.setInt(11, p.getTelefono());
           			stmt.setInt(12, p.getCodigoPostal());
           			stmt.execute();
-            	
+                }
 
             	stmt.close();
     		
@@ -135,7 +135,7 @@ public class ControladorNuevoPiloto {
                 alert.showAndWait();
             }
         }
-    }
+    //}
 
     /**
      * Called when the user clicks cancel.
