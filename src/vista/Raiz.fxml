@@ -14,7 +14,7 @@
         <menus>
             <Menu mnemonicParsing="false" text="Home">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Ir" />
+                  <MenuItem mnemonicParsing="false" onAction="#home" text="Ir" />
                </items></Menu>
           <Menu mnemonicParsing="false" text="Calendario de concursos">
                <items>

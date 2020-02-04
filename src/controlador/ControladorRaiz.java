@@ -40,17 +40,18 @@ public class ControladorRaiz {
 		
 	}
 
-    /*private void nuevoPiloto(Piloto piloto) {
-  		this.mainApp.showPilotoNuevaDialogo(piloto);
-  		
-  	}*/
+    @FXML
+    private void home() {
+		this.mainApp.showPilotoOverview();
+		
+	}
     @FXML
     private void nuevoPiloto() {
-        Piloto tempPerson = new Piloto();
+        Piloto tempPiloto = new Piloto();
         //boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
-        boolean okClicked = mainApp.showPilotoNuevaDialogo(tempPerson);
+        boolean okClicked = mainApp.showPilotoNuevaDialogo(tempPiloto);
         if (okClicked) {
-            mainApp.getPilotoData().add(tempPerson);
+            mainApp.getPilotoData().add(tempPiloto);
         }
     }
     /**
