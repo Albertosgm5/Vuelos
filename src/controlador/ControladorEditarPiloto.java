@@ -57,7 +57,7 @@ public class ControladorEditarPiloto {
     @FXML
     private TableColumn<Piloto, String> apellidosColumna;
     
-    private static final String EDIT_PILOTO = "update pilotos set nombre = ?, apellidos = ?, contraseña = ?, club = ?, email = ?, licencia = ?, pais = ?, calle = ?, ciudad = ?, provincia = ? , telefono = ?, codigoPostal = ? where nombre = ? and apellidos = ?";
+    private static final String EDIT_PILOTO = "update pilotos set nombre = ?, apellidos = ?, contraseña = ?, club = ?, email = ?, licencia = ?, pais = ?, calle = ?, ciudad = ?, provincia = ? , telefono = ?, codigoPostal = ? where licencia = ?";
     @FXML
     private void initialize() {
     }
@@ -107,8 +107,7 @@ public class ControladorEditarPiloto {
            
             int selectedIndex = pilotoTabla.getSelectionModel().getSelectedIndex();
         	//recogemos los datos necesarios para realizar los criterios de la consulta
-        	String nombre =(String) pilotoTabla.getSelectionModel().getSelectedItem().getNombre();
-        	String apellidos =(String) pilotoTabla.getSelectionModel().getSelectedItem().getApellidos();
+        	String licencia =(String) pilotoTabla.getSelectionModel().getSelectedItem().getLicencia();
         	if (selectedIndex >= 0) {
         		
             PreparedStatement stmt = null;
@@ -131,8 +130,7 @@ public class ControladorEditarPiloto {
           			stmt.setString(10, p.getProvincia());
           			stmt.setInt(11, p.getTelefono());
           			stmt.setInt(12, p.getCodigoPostal());
-          			stmt.setString(13, nombre);
-        			stmt.setString(14, apellidos);
+          			stmt.setString(13, licencia);
           			stmt.execute();
             	}
 
