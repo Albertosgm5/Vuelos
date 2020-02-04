@@ -69,21 +69,6 @@ public class ControladorNuevoPiloto {
      */
     public void setPiloto(Piloto piloto) {
         this.piloto = piloto;
-
-        nombreCampo.setText(piloto.getNombre());
-        apellidosCampo.setText(piloto.getApellidos());
-        contraseniaCampo.setText(piloto.getContrasenia());
-        clubCampo.setText(piloto.getClub());
-        emailCampo.setText(piloto.getEmail());
-        licenciaCampo.setText(piloto.getLicencia());
-        paisCampo.setText(piloto.getPais());
-        calleCampo.setText(piloto.getCalle());
-        ciudadCampo.setText(piloto.getCiudad());
-        provinciaCampo.setText(piloto.getProvincia());
-        telefonoCampo.setText(Integer.toString(piloto.getTelefono()));
-        codigoPostalCampo.setText(Integer.toString(piloto.getCodigoPostal()));
-        
-       
     }
 
     /**
@@ -113,14 +98,14 @@ public class ControladorNuevoPiloto {
             piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
             piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
            
+            Conexion conexion = new Conexion();
             PreparedStatement stmt = null;
-        	Conexion conexion = new Conexion();
             try {
             	ListaPilotosXML list = new ListaPilotosXML();
                 list.setPiloto(MainApp.pilotoData);
-            	for(int i=0;i<list.getPiloto().size();i++) {
+            	
             		stmt = conexion.dameConexion().prepareStatement(CREATE_PILOTO);
-            		Piloto p = list.getPiloto().get(i);
+            		Piloto p = (Piloto) list.getPiloto();
             		stmt.setString(1, p.getNombre());
           			stmt.setString(2, p.getApellidos());
           			stmt.setString(3, p.getContrasenia());
@@ -134,7 +119,7 @@ public class ControladorNuevoPiloto {
           			stmt.setInt(11, p.getTelefono());
           			stmt.setInt(12, p.getCodigoPostal());
           			stmt.execute();
-            	}
+            	
 
             	stmt.close();
     		
