@@ -6,24 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorConcursos">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControladorConcursos">
    <left>
-      <AnchorPane prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="234.0" prefWidth="635.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Calendario de Concursos">
+            <Label layoutX="178.0" text="Calendario de Concursos">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
-            <TableView prefHeight="400.0" prefWidth="750.0">
+            <TableView layoutX="-1.0" layoutY="37.0" prefHeight="313.0" prefWidth="655.0">
               <columns>
                 <TableColumn prefWidth="54.0" text="No" />
-                <TableColumn prefWidth="154.0" text="Concurso" />
-                  <TableColumn prefWidth="101.0" text="Tipo" />
-                  <TableColumn prefWidth="119.0" text="Fecha" />
-                  <TableColumn prefWidth="124.0" text="Lugar" />
-                  <TableColumn prefWidth="196.0" text="Fin Registro" />
-                  <TableColumn prefWidth="407.0" text="Acción" />
+                <TableColumn prefWidth="152.0" text="Concurso" />
+                  <TableColumn prefWidth="65.0" text="Tipo" />
+                  <TableColumn prefWidth="88.0" text="Fecha" />
+                  <TableColumn prefWidth="118.0" text="Lugar" />
+                  <TableColumn prefWidth="106.0" text="Fin Registro" />
+                  <TableColumn prefWidth="71.0" text="Acción" />
               </columns>
             </TableView>
          </children>

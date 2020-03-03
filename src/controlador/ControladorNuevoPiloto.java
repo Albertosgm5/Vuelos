@@ -8,9 +8,14 @@ import javafx.stage.Stage;
 
 import java.sql.PreparedStatement;
 
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
+
 import modelo.Piloto;
 import util.Conexion;
+
 import modelo.ListaPilotosXML;
+
 
 
 public class ControladorNuevoPiloto {
@@ -69,6 +74,30 @@ public class ControladorNuevoPiloto {
      */
     public void setPiloto(Piloto piloto) {
         this.piloto = piloto;
+        
+        /*nombreCampo.setText(piloto.getNombre());
+        
+        apellidosCampo.setText(piloto.getApellidos());
+        
+        contraseniaCampo.setText(piloto.getContrasenia());
+       
+        clubCampo.setText(piloto.getClub());
+        
+        emailCampo.setText(piloto.getEmail());
+        
+        licenciaCampo.setText(piloto.getLicencia());
+       
+        paisCampo.setText(piloto.getPais());
+        
+        calleCampo.setText(piloto.getCalle());
+        
+        ciudadCampo.setText(piloto.getCiudad());
+        
+        provinciaCampo.setText(piloto.getProvincia());
+        
+        telefonoCampo.setText(Integer.toString(piloto.getTelefono()));
+        
+        codigoPostalCampo.setText(Integer.toString(piloto.getCodigoPostal()));*/
     }
 
     /**
@@ -97,7 +126,16 @@ public class ControladorNuevoPiloto {
             piloto.setProvincia(provinciaCampo.getText());
             piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
             piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
+            
+            /*
+            ODB odb = ODBFactory.open("VUELOS.DB");
            
+    		odb.store(piloto);
+    		
+            okClicked = true;
+            dialogStage.close();
+            odb.close();
+            */
             Conexion conexion = new Conexion();
             PreparedStatement stmt = null;
             try {
@@ -134,8 +172,8 @@ public class ControladorNuevoPiloto {
                 System.err.print(e);
                 alert.showAndWait();
             }
-        }
-    //}
+        //}
+    }
 
     /**
      * Called when the user clicks cancel.
