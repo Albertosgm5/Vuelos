@@ -136,7 +136,33 @@ public class MainApp extends Application{
             e.printStackTrace();
         }
     }
-    
+    public void showSesion() {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("../vista/Entrar.fxml"));
+            AnchorPane sesion = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Inicio Sesion");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(sesion);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            ControladorSesion controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+           
+        }
+    }
     /**
      * Opens a dialog to edit details for the specified person. If the user
      * clicks OK, the changes are saved into the provided person object and true

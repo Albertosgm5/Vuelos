@@ -48,7 +48,6 @@ public class ControladorSesion {
 	 * Called when the user clicks ok.
 	 */
 
-	@SuppressWarnings("unused")
 	private void inicioSesion() {
 		String errorMessage = "";
 
@@ -71,8 +70,8 @@ public class ControladorSesion {
 		okClicked = true;
         dialogStage.close();
 	}
-	 @SuppressWarnings("unused")
 	private void handleClose() {
 	        dialogStage.close();
 	    }
+
 }

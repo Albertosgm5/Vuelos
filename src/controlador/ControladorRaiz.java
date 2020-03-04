@@ -39,6 +39,11 @@ public class ControladorRaiz {
 		this.mainApp.showConcursos();
 		
 	}
+    @FXML
+    private void sesion() {
+		this.mainApp.showSesion();
+		
+	}
 
     @FXML
     private void home() {
