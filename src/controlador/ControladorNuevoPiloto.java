@@ -44,7 +44,7 @@ public class ControladorNuevoPiloto {
     @FXML
     private TextField codigoPostalCampo;
     
-    private static final String CREATE_PILOTO = "insert into pilotos (nombre, apellidos, contrasena, club, email, licencia, pais, calle, ciudad, provincia, telefono, codigoPostal) values (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String CREATE_PILOTO = "insert into pilotos (nombre, apellidos, contrasena, club, email, licencia, pais, calle, ciudad, provincia, telefono, codigoPostal) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
     private Stage dialogStage;
     private Piloto piloto;
@@ -129,7 +129,7 @@ public class ControladorNuevoPiloto {
             piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
             
             System.out.println(piloto);
-            /*
+            
             ODB odb = ODBFactory.open("VUELOS.DB");
            
     		odb.store(piloto);
@@ -137,7 +137,8 @@ public class ControladorNuevoPiloto {
             okClicked = true;
             dialogStage.close();
             odb.close();
-            */
+            
+            /*
             Conexion conexion = new Conexion();
             PreparedStatement stmt = null;
             try {
@@ -174,6 +175,7 @@ public class ControladorNuevoPiloto {
                 System.err.print(e);
                 alert.showAndWait();
             }
+            */
         //}
     }
 
