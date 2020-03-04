@@ -127,8 +127,7 @@ public class ControladorNuevoPiloto {
             piloto.setProvincia(provinciaCampo.getText());
             piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
             piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
-            
-            System.out.println(piloto);
+           
             
             ODB odb = ODBFactory.open("VUELOS.DB");
            
