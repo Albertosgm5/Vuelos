@@ -44,7 +44,7 @@ public class ControladorNuevoPiloto {
     @FXML
     private TextField codigoPostalCampo;
     
-    private static final String CREATE_PILOTO = "insert into pilotos (nombre, apellidos, contraseña, club, email, licencia, pais, calle, ciudad, provincia, telefono, codigo postal) values (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String CREATE_PILOTO = "insert into pilotos (nombre, apellidos, contrasena, club, email, licencia, pais, calle, ciudad, provincia, telefono, codigoPostal) values (?,?,?,?,?,?,?,?,?,?,?)";
 
     private Stage dialogStage;
     private Piloto piloto;
