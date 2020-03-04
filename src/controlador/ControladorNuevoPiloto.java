@@ -118,6 +118,7 @@ public class ControladorNuevoPiloto {
             piloto.setNombre(nombreCampo.getText());
             piloto.setApellidos(apellidosCampo.getText());
             piloto.setContrasenia(contraseniaCampo.getText());
+            piloto.setClub(clubCampo.getText());
             piloto.setEmail(emailCampo.getText());
             piloto.setLicencia(licenciaCampo.getText());
             piloto.setPais(paisCampo.getText());
@@ -127,6 +128,7 @@ public class ControladorNuevoPiloto {
             piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
             piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
             
+            System.out.println(piloto);
             /*
             ODB odb = ODBFactory.open("VUELOS.DB");
            
