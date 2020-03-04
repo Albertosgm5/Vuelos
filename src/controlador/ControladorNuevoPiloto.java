@@ -114,7 +114,7 @@ public class ControladorNuevoPiloto {
      */
     @FXML
     private void handleOk() {
-        //if (isInputValid()) {
+        if (isInputValid()) {
             piloto.setNombre(nombreCampo.getText());
             piloto.setApellidos(apellidosCampo.getText());
             piloto.setContrasenia(contraseniaCampo.getText());
@@ -175,7 +175,7 @@ public class ControladorNuevoPiloto {
                 alert.showAndWait();
             }
             */
-        //}
+        }
     }
 
     /**
