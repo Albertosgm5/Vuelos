@@ -25,6 +25,17 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#nuevoPiloto" text="Ir" />
                </items></Menu>
+            <Menu mnemonicParsing="false" text="                             ">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu fx:id="usuario" mnemonicParsing="false" text="Nombre Usuario">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Editar Perfil" />
+                  <MenuItem mnemonicParsing="false" text="Cerrar Sesion" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

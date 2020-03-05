@@ -4,11 +4,16 @@ package controlador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Menu;
 import modelo.Piloto;
 
 
 public class ControladorRaiz {
 	// Reference to the main application
+	
+	@FXML
+	private Menu usuario;
+	
     private MainApp mainApp;
     /**
      * Is called by the main application to give a reference back to itself.
@@ -28,6 +33,9 @@ public class ControladorRaiz {
       
     }
     
+    public void guardarUsuario(String licencia) {
+    	this.usuario.setText(licencia);
+    }
     
     @FXML
 	private void hojaVuelos() {

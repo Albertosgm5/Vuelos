@@ -29,7 +29,7 @@
       </GridPane>
       <HBox layoutX="88.0" layoutY="106.0" prefHeight="31.0" prefWidth="122.0">
          <children>
-            <Button mnemonicParsing="false" text="Entrar" />
+            <Button mnemonicParsing="false" onAction="#inicioSesion" text="Entrar" />
             <Button mnemonicParsing="false" onAction="#handleClose" text="Cerrar" />
          </children>
       </HBox>

@@ -47,7 +47,7 @@ public class ControladorSesion {
 	/**
 	 * Called when the user clicks ok.
 	 */
-
+@FXML
 	private void inicioSesion() {
 		String errorMessage = "";
 
@@ -67,9 +67,11 @@ public class ControladorSesion {
 			errorMessage += "El usuario no existe\n";
 
 		}
+		
 		okClicked = true;
         dialogStage.close();
 	}
+@FXML
 	private void handleClose() {
 	        dialogStage.close();
 	    }
