@@ -12,6 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.Objects;
+import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.criteria.And;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+
 import modelo.Piloto;
 import util.Conexion;
 
@@ -19,11 +28,10 @@ public class ControladorPiloto {
     @FXML
     private TableView<Piloto> pilotoTabla;
     @FXML
-    private TableColumn<Piloto, String> nombreColumna;
-    @FXML
-    private TableColumn<Piloto, String> apellidosColumna;
+    private TableColumn<Piloto, String> licenciaColumna;
     
-    private static final String DELETE_PILOTO = "delete from pilotos  where nombre = ? and apellidos = ?";
+    
+    //private static final String DELETE_PILOTO = "delete from pilotos  where nombre = ? and apellidos = ?";
     
     @FXML
     private Label nombreEtiqueta;
@@ -67,10 +75,8 @@ public class ControladorPiloto {
     @FXML
     private void initialize() {
     	// Initialize the person table with the two columns.
-        nombreColumna.setCellValueFactory(
+        licenciaColumna.setCellValueFactory(
                 cellData -> cellData.getValue().nombreProperty());
-        apellidosColumna.setCellValueFactory(
-                cellData -> cellData.getValue().apellidosProperty());
 
         // Clear person details.
         showPilotoDetails(null);
@@ -133,40 +139,28 @@ public class ControladorPiloto {
     /**
      * Called when the user clicks on the delete button.
      */
+    
     @FXML
-    private void borradoPiloto() {
+    private void handleDeletePerson() {
     	int selectedIndex = pilotoTabla.getSelectionModel().getSelectedIndex();
     	//recogemos los datos necesarios para realizar los criterios de la consulta
     	String nombre =(String) pilotoTabla.getSelectionModel().getSelectedItem().getNombre();
-    	String apellidos =(String) pilotoTabla.getSelectionModel().getSelectedItem().getApellidos();
     	if (selectedIndex >= 0) {
-    		Connection con = null;
-    		PreparedStatement stmt = null;
-    		ResultSet rs = null;
-    		try {
-    			con = new Conexion().dameConexion();
-    			stmt = con.prepareStatement(DELETE_PILOTO);
-    			stmt.setString(1, nombre);
-    			stmt.setString(2, apellidos);
-    			stmt.executeUpdate();
-
-    		}catch (SQLException sqle) {
-    			System.err.println(sqle.getMessage());
-    		} finally {
-    			try {
-    				if (rs != null) {
-    					rs.close();
-    				}
-    				if (stmt != null) {
-    					stmt.close();
-    				}
-    				if (con != null) {
-    					Conexion.closeConnection(con);
-    				}
-    			} catch (SQLException sqle) {
-    				System.err.println(sqle.getMessage());
-    			}
-    		}
+            pilotoTabla.getItems().remove(selectedIndex);
+         // conectamos con la base de datos, si no existe se crea
+            ODB odb = ODBFactory.open("VUELOS.DB");
+         // Cogemos los criterios para la consulta
+            ICriterion criterio = new And().add(Where.equal("licencia", licenciaColumna));
+         // Hacemos la consulta 
+            IQuery query = new CriteriaQuery(Piloto.class, criterio);
+         // Cargamos los objetos que coincidan con esa consulta
+            Objects<Piloto> objects = odb.getObjects(query);
+         // Nos posicionamos en el primer resultado
+            Piloto pil=(Piloto) objects.getFirst();
+         // Y lo borramos
+            odb.delete(pil);
+         //cerramos la conexión con la base de datos
+            odb.close();
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);

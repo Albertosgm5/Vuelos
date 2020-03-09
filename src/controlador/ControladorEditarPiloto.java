@@ -12,10 +12,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.Objects;
+import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.criteria.And;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+
+import modelo.Concurso;
 import modelo.ListaPilotosXML;
 
 import modelo.Piloto;
 import util.Conexion;
+import util.Fecha;
 
 
 public class ControladorEditarPiloto {
@@ -53,11 +64,9 @@ public class ControladorEditarPiloto {
     @FXML
     private TableView<Piloto> pilotoTabla;
     @FXML
-    private TableColumn<Piloto, String> nombreColumna;
-    @FXML
-    private TableColumn<Piloto, String> apellidosColumna;
+    private TableColumn<Piloto, String> licenciaColumna;
     
-    private static final String EDIT_PILOTO = "update pilotos set nombre = ?, apellidos = ?, contrasena = ?, club = ?, email = ?, licencia = ?, pais = ?, calle = ?, ciudad = ?, provincia = ? , telefono = ?, codigoPostal = ? where licencia = ?";
+    //private static final String EDIT_PILOTO = "update pilotos set nombre = ?, apellidos = ?, contrasena = ?, club = ?, email = ?, licencia = ?, pais = ?, calle = ?, ciudad = ?, provincia = ? , telefono = ?, codigoPostal = ? where licencia = ?";
     @FXML
     private void initialize() {
     }
@@ -90,74 +99,53 @@ public class ControladorEditarPiloto {
     public boolean isOkClicked() {
         return okClicked;
     }
+   
     @FXML
     private void handleOk() {
-        if (isInputValid()) {
-        	piloto.setNombre(nombreCampo.getText());
-            piloto.setApellidos(apellidosCampo.getText());
-            piloto.setContrasenia(contraseniaCampo.getText());
-            piloto.setEmail(emailCampo.getText());
-            piloto.setLicencia(licenciaCampo.getText());
-            piloto.setPais(paisCampo.getText());
-            piloto.setCalle(calleCampo.getText());
-            piloto.setCiudad(ciudadCampo.getText());
-            piloto.setProvincia(provinciaCampo.getText());
-            piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
-            piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
-           
-            int selectedIndex = pilotoTabla.getSelectionModel().getSelectedIndex();
-        	//recogemos los datos necesarios para realizar los criterios de la consulta
-        	String licencia =(String) pilotoTabla.getSelectionModel().getSelectedItem().getLicencia();
-        	if (selectedIndex >= 0) {
-        		
-            PreparedStatement stmt = null;
-        	Conexion conexion = new Conexion();
-        	try {
-            	ListaPilotosXML list = new ListaPilotosXML();
-                list.setPiloto(MainApp.pilotoData);
-            	for(int i=0;i<list.getPiloto().size();i++) {
-            		stmt = conexion.dameConexion().prepareStatement(EDIT_PILOTO);
-            		Piloto p = list.getPiloto().get(i);
-            		stmt.setString(1, p.getNombre());
-          			stmt.setString(2, p.getApellidos());
-          			stmt.setString(3, p.getContrasenia());
-          			stmt.setString(4, p.getClub());
-          			stmt.setString(5, p.getEmail());
-          			stmt.setString(6, p.getLicencia());
-          			stmt.setString(7, p.getPais());
-          			stmt.setString(8, p.getCalle());
-          			stmt.setString(9, p.getCiudad());
-          			stmt.setString(10, p.getProvincia());
-          			stmt.setInt(11, p.getTelefono());
-          			stmt.setInt(12, p.getCodigoPostal());
-          			stmt.setString(13, licencia);
-          			stmt.execute();
-            	}
-
-            	stmt.close();
-    		
-            	okClicked = true;
-            	dialogStage.close();
-            
-            } catch (Exception e) { 
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("No puedo cargar los datos");
-                alert.setContentText("No puedo cargar los datos a la base de datos");
-                System.err.print(e);
-                alert.showAndWait();
-            }
-        	} else {
-                // Nothing selected.
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.initOwner(mainApp.getPrimaryStage());
-                alert.setTitle("No seleccionado");
-                alert.setHeaderText("No has seleccionado persona");
-                alert.setContentText("Por favor selecciona una persona de la tabla.");
-
-                alert.showAndWait();
-            }
-        }
+    	//if (isInputValid()) {
+    	piloto.setNombre(nombreCampo.getText());
+        piloto.setApellidos(apellidosCampo.getText());
+        piloto.setContrasenia(contraseniaCampo.getText());
+        piloto.setClub(clubCampo.getText());
+        piloto.setEmail(emailCampo.getText());
+        piloto.setLicencia(licenciaCampo.getText());
+        piloto.setPais(paisCampo.getText());
+        piloto.setCalle(calleCampo.getText());
+        piloto.setCiudad(ciudadCampo.getText());
+        piloto.setProvincia(provinciaCampo.getText());
+        piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
+        piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
+       
+        // conectamos con la base de datos, si no existe se crea
+        ODB odb = ODBFactory.open("VUELOS.DB");
+        // Cogemos los criterios para la consulta
+        ICriterion criterio = new And().add(Where.equal("licencia", licenciaCampo.getText()));
+     // Hacemos la consulta 
+        IQuery query = new CriteriaQuery(Concurso.class, criterio);
+     // Cargamos los objetos que coincidan con esa consulta
+        Objects<Concurso> objects = odb.getObjects(query);
+     // Nos posicionamos en el primer resultado
+        Concurso concurso=(Concurso) objects.getFirst();
+     // A la persona sobre la que hacemos la consulta le pasamos sus nuevos datos
+     // Con esto conseguimos modificar sus datos en la base de datos
+        piloto.setNombre(nombreCampo.getText());
+        piloto.setApellidos(apellidosCampo.getText());
+        piloto.setContrasenia(contraseniaCampo.getText());
+        piloto.setClub(clubCampo.getText());
+        piloto.setEmail(emailCampo.getText());
+        piloto.setLicencia(licenciaCampo.getText());
+        piloto.setPais(paisCampo.getText());
+        piloto.setCalle(calleCampo.getText());
+        piloto.setCiudad(ciudadCampo.getText());
+        piloto.setProvincia(provinciaCampo.getText());
+        piloto.setTelefono(Integer.parseInt(telefonoCampo.getText()));
+        piloto.setCodigoPostal(Integer.parseInt(codigoPostalCampo.getText()));
+		odb.store(piloto);
+		
+        okClicked = true;
+        dialogStage.close();
+        odb.close();
+        
     }
 
     /**

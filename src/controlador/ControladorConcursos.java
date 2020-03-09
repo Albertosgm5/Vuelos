@@ -2,17 +2,30 @@ package controlador;
 
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.Objects;
+import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.criteria.And;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import modelo.Concurso;
+import modelo.Piloto;
 import util.Fecha;
 
 public class ControladorConcursos {
 	private MainApp mainApp;
+	
+    @FXML
+    private TableView<Piloto> concursoTabla;
+    @FXML
+    private TableColumn<Piloto, String> combreColumna;
 	
 	@FXML
     private TableColumn nombre;
@@ -40,6 +53,7 @@ public class ControladorConcursos {
     public void setConcurso(Concurso concurso) {
         this.concurso = concurso;
     }
+    @FXML
     private void handleOk() {
        //if (isInputValid()) {
             concurso.setNombre(nombre.getText());
@@ -95,6 +109,70 @@ public class ControladorConcursos {
                 alert.showAndWait();
             }*/
         //}
+    }
+    @FXML
+    private void handleDeleteConcurso() {
+    	int selectedIndex = concursoTabla.getSelectionModel().getSelectedIndex();
+    	//recogemos los datos necesarios para realizar los criterios de la consulta
+    	String nombre =(String) concursoTabla.getSelectionModel().getSelectedItem().getNombre();
+    	if (selectedIndex >= 0) {
+            concursoTabla.getItems().remove(selectedIndex);
+         // conectamos con la base de datos, si no existe se crea
+            ODB odb = ODBFactory.open("VUELOS.DB");
+         // Cogemos los criterios para la consulta
+            ICriterion criterio = new And().add(Where.equal("nombre", nombre));
+         // Hacemos la consulta 
+            IQuery query = new CriteriaQuery(Concurso.class, criterio);
+         // Cargamos los objetos que coincidan con esa consulta
+            Objects<Concurso> objects = odb.getObjects(query);
+         // Nos posicionamos en el primer resultado
+            Concurso con=(Concurso) objects.getFirst();
+         // Y lo borramos
+            odb.delete(con);
+         //cerramos la conexión con la base de datos
+            odb.close();
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No seleccionado");
+            alert.setHeaderText("No has seleccionado persona");
+            alert.setContentText("Por favor selecciona una persona de la tabla.");
+
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    private void handleEdit() {
+        //if (isInputValid()) {
+             concurso.setNombre(nombre.getText());
+             concurso.setTipo(tipo.getText());
+             concurso.setFecha(Fecha.parse(fecha.getText()));
+             concurso.setLugar(lugar.getText());
+             concurso.setFinRe(Fecha.parse(finRe.getText()));
+            
+             // conectamos con la base de datos, si no existe se crea
+             ODB odb = ODBFactory.open("VUELOS.DB");
+             // Cogemos los criterios para la consulta
+             ICriterion criterio = new And().add(Where.equal("nombre", nombre.getText()));
+          // Hacemos la consulta 
+             IQuery query = new CriteriaQuery(Concurso.class, criterio);
+          // Cargamos los objetos que coincidan con esa consulta
+             Objects<Concurso> objects = odb.getObjects(query);
+          // Nos posicionamos en el primer resultado
+             Concurso concurso=(Concurso) objects.getFirst();
+          // A la persona sobre la que hacemos la consulta le pasamos sus nuevos datos
+          // Con esto conseguimos modificar sus datos en la base de datos
+     		concurso.setNombre(nombre.getText());
+     		concurso.setTipo(tipo.getText());
+     		concurso.setFecha(Fecha.parse(fecha.getText()));
+     		concurso.setLugar(lugar.getText());
+     		concurso.setFinRe(Fecha.parse(finRe.getText()));
+     		odb.store(concurso);
+     		
+             okClicked = true;
+             dialogStage.close();
+             odb.close();
     }
 	 @FXML
     private void handleCancel() {

@@ -63,7 +63,7 @@ public class ControladorHojaVuelos {
             okClicked = true;
             dialogStage.close();
             odb.close();
-            
+            /*
             Conexion conexion = new Conexion();
             PreparedStatement stmt = null;
             try {
